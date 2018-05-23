@@ -36,6 +36,11 @@ class Zone:
 		ZONES = [[0] * 15 for i in range(15)]
 		print(ZONES)
 		return(ZONES)
+	def build_walls(self, ZONES):
+		WALL = 1
+		initialize_zone.ZONES [0] [2] = WALL
+
+
 
 	#def object_placement(self , ZONES)
 		#MAC_GYVER = 1
