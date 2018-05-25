@@ -1,17 +1,17 @@
 import pygame, sys
 from pygame.locals import *
+import random
 
 FLOOR = 0
 GUARDIAN = 4
-MAC = 3
 WALL = 1
 OUT = 2
-TILESIZE = 100
-MAPWIDHT = 15
-MAPHEIGHT = 15
+START = 3
+MAC = 5
+
 
 pygame.init()
-WINDOW = pygame.display.set_mode((1600 , 900), RESIZABLE)
+WINDOW = pygame.display.set_mode((645 , 480), RESIZABLE)
 pygame.display.flip()
 
 Pics = {
@@ -26,46 +26,48 @@ Pics = {
 tilemap =   [
 			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR],
 			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, OUT],
-			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, FLOOR, FLOOR,FLOOR, WALL, FLOOR],
+			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, FLOOR, FLOOR,FLOOR, WALL, GUARDIAN],
 			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR],
 			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR],
-			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR],
+			[FLOOR, FLOOR, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR],
 			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR],
 			[FLOOR, WALL, FLOOR,FLOOR, FLOOR, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR],
 			[FLOOR, WALL, FLOOR,FLOOR, FLOOR, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR],
 			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR],
-			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, FLOOR, FLOOR],
+			[START, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, FLOOR, FLOOR],
 			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, FLOOR, FLOOR],
 			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR],
 			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, FLOOR, FLOOR,FLOOR, WALL, FLOOR],
 			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, FLOOR, FLOOR,FLOOR, WALL, FLOOR],
 			]
 
-TILESIZE = 60
-MAPWIDHT = 15
-MAPHEIGHT = 15
 
-i = 1
 y = 0
-z = 0
-while i <= 226: #15*15
-	if tilemap [y][z] == 0:
-		WINDOW.blit(pygame.image.load("floor1.jpg").convert(), [z*106, y*60])
+x = 0
+while y < 15: 
+	if tilemap [y][x] == 0:
+		WINDOW.blit(pygame.image.load("floor1.jpg").convert(), [x*43, y*32])
 		print("floor")
 		pygame.display.flip()
-	elif tilemap [y][z] == 1:
-		WINDOW.blit(pygame.image.load("wall1.png").convert(), [z*106, y*60])
+	elif tilemap [y][x] == 1:
+		WINDOW.blit(pygame.image.load("wall1.png").convert(), [x*43, y*32])
 		print("wall")
 		pygame.display.flip()
-	elif tilemap [y][z] == 2:
+	elif tilemap [y][x] == 2:
 		DOOR = pygame.image.load("door.jpg").convert()
 		DOOR.set_colorkey((0,0,0))
-		WINDOW.blit(DOOR, [z*106, y*60])
+		WINDOW.blit(DOOR, [x*43, y*32])
 		pygame.display.flip()
-	i += 1
-	z += 1
-	print (z)
+	elif tilemap [y][x] == 3:
+		WINDOW.blit(pygame.image.load("mac_gyver.png").convert_alpha(), [x*43, y*32])
+		pygame.display.flip()
+	elif tilemap [y] [x] == 4:
+		WINDOW.blit(pygame.image.load("GUARDIAN.png").convert_alpha(), [x*43, y*32])
+		pygame.display.flip()
+	print (x)
 	print (y)
-	if z%15 == 0: # toutes les 15 colonnes je saute une ligne
+	x += 1
+	if x%15 == 0: # toutes les 15 colonnes je saute une ligne
 		y += 1
-		z = 0
+		x = 0
+
