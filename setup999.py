@@ -1,5 +1,6 @@
 import pygame, sys
 from pygame.locals import *
+import numpy as np
 import random
 
 FLOOR = 0
@@ -71,3 +72,29 @@ while y < 15:
 		y += 1
 		x = 0
 
+
+
+
+
+
+# fonction définissant floor acceptable = 10
+# placement objets aléatoire
+
+key1 = 6
+key2 = 7
+key3 = 8
+
+while False :
+	key1 = random.choice(tilemap)
+	
+	if key1 == 10 :
+		key2 = random.choice(tilemap)
+
+		if key2 == 10 :
+			key3 = random.choice(tilemap)
+
+			if key3 == 10 :
+				return True
+
+	else :
+		return False
