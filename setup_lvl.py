@@ -1,113 +1,58 @@
-import pygame, sys
-from pygame.locals import *
+#!/usr/bin/python3
+# -*- coding: Utf-8 -*
 
-FLOOR = 0
-GUARDIAN = 4
-MAC = 3
-WALL = 1
-OUT = 2
-TILESIZE = 100
-MAPWIDHT = 15
-MAPHEIGHT = 15
+import pygame
+from pygame.locals import *
+from class_char import *
+from ressources import *
+from class_map import *
 
 pygame.init()
-WINDOW = pygame.display.set_mode((640 , 480), RESIZABLE)
-pygame.display.flip()
 
-#Pics = {
-#			WALL : pygame.image.load("wall1.png").convert(),
-#			FLOOR : pygame.image.load("floor1.jpg").convert(),
-#			OUT : pygame.image.load("door.jpg").convert(),
-#			MAC : pygame.image.load("mac_gyver.png").convert(),
-#			GUARDIAN : pygame.image.load("GUARDIAN.png").convert()
-#		}
-
-
-
-#tilemap =   [
-#			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-#			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-#			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-#			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-#			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-#			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-#			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-#			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-#			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-#			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-#			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-#			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-#			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-#			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-#			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, FLOOR, OUT],
-#			]
-
-TILESIZE = 60
-MAPWIDHT = 15
-MAPHEIGHT = 15
+#Ouverture de la fenêtre Pygame (carré : largeur = hauteur)
+WINDOW = pygame.display.set_mode((WINDOW_HEIGHT, WINDOW_WIDHT))
+MAP = Map()
+#MAP.random_item()
+#MAP.images_display()
+MAC = char(tilemap, ITEMS)
+pygame.display.set_caption(TITLE)
+MAP.random_item()
+ITM = 0
 
 
-
-
-class Zone:
-	@classmethod
-	def init_zone(cls):
-		tilemap =   [
-			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],
-			[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, WALL, FLOOR],[FLOOR, FLOOR, OUT],
-			]
-		return tilemap
-	@classmethod
-	def load_pics(cls, tilemap):
-		i = 1
-		while i <= 226:
-			y = 0
-			print(tilemap[i][y])
-			if tilemap [i][y] == 0:
-				pygame.image.load("mac_gyver.png").convert()
-			elif tilemap [i][y] == 1:
-				pygame.image.load("wall1.png").convert()
-			i += 1
-			if i%15 == 0:
-				y += 1
-		return tilemap
-
-def main():
-	Zone.init_zone()
-	Zone.load_pics(tilemap)
-main()
-
+#BOUCLE PRINCIPALE
+continuer = 1
+while continuer:
 	
+	#Limitation de vitesse de la boucle
+	pygame.time.Clock().tick(30)
+	for event in pygame.event.get():
+		
+		if event.type == QUIT:
+			continuer = 0
+		
+		elif event.type == KEYDOWN:
+			#Si l'utilisateur presse Echap , quit
+			if event.key == K_ESCAPE:
+				continuer = 0
+					
+			#Touches de déplacement
+			elif event.key == K_RIGHT:
+				ITM = MAC.move('right')
+			elif event.key == K_LEFT:
+				ITM = MAC.move('left')
+			elif event.key == K_UP:
+				ITM = MAC.move('up')
+			elif event.key == K_DOWN:
+				ITM = MAC.move('down')
+		#game over
+		if ITM < 3 and tilemap[MAC.case_y][MAC.case_x] == 4:
+			continuer = 0			
+	#Affichages aux nouvelles positions
+	MAP.images_display() 
+	pygame.display.flip()
+	print("il y a {} items" .format(ITM))
 
-#while True:
-	#for event in pygame.event.get():
-		#if event.type == QUIT:
-			#pygame.quit()
-			#sys.exit()
-
-
-
-
-
-#while tilemap[0]:
-	#pygame.image.load("wall1.png").convert(),	
-#for WALL in tilemap:
-#	pygame.image.load("wall1.png").convert()
-#for FLOOR in tilemap:
-#	pygame.image.load("floor1.jpg").convert(),
-
-
-
+	#Victoire -> Retour à l'accueil
+	if tilemap[MAC.case_y][MAC.case_x] == 2:
+		continuer = 0

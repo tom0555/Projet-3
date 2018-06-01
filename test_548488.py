@@ -49,3 +49,4 @@ while y < 15:
 		y += 1
 		x = 0
 
+new = tilemap

@@ -1,17 +1,17 @@
 import pygame, sys
 from pygame.locals import *
-import numpy as np
 import random
 
-KEY1 = 10
-KEY2 = 11
-KEY3 = 12
+ITEM1 = 84
+ITEM2 = 16
+ITEM3 = 15
 FLOOR = 0
 GUARDIAN = 4
 WALL = 1
-OUT = 2
+DOOR = 2
 START = 3
 MAC = 5
+
 
 
 pygame.init()
@@ -21,62 +21,71 @@ pygame.display.flip()
 Pics = {
 			WALL : pygame.image.load("wall1.png").convert(),
 			FLOOR : pygame.image.load("floor1.jpg").convert(),
-			OUT : pygame.image.load("door.jpg").convert(),
+			DOOR : pygame.image.load("door.jpg").convert(),
 			MAC : pygame.image.load("mac_gyver.png").convert(),
-			GUARDIAN : pygame.image.load("GUARDIAN.png").convert()
+			GUARDIAN : pygame.image.load("GUARDIAN.png").convert(),
+			ITEM1 : pygame.image.load("key1.jpg").convert_alpha(),
+			ITEM2 : pygame.image.load("key2.jpg").convert_alpha(),
+			ITEM3 : pygame.image.load("key3.jpg").convert_alpha()
 		}
 
 
 tilemap =   [
-			[FLOOR, WALL, FLOOR,FLOOR, WALL, KEY1,KEY1, WALL, FLOOR,FLOOR, WALL, KEY3,KEY3, WALL, FLOOR],
-			[FLOOR, WALL, FLOOR,FLOOR, WALL, KEY1,KEY1, WALL, FLOOR,FLOOR, WALL, KEY3,KEY3, WALL, OUT],
-			[FLOOR, WALL, FLOOR,FLOOR, WALL, KEY1,KEY1, WALL, FLOOR,FLOOR, FLOOR, KEY3,KEY3, WALL, GUARDIAN],
-			[FLOOR, WALL, FLOOR,FLOOR, WALL, KEY1,KEY1, WALL, FLOOR,FLOOR, WALL, KEY3,KEY3, WALL, FLOOR],
-			[FLOOR, WALL, FLOOR,FLOOR, WALL, KEY1,KEY1, WALL, FLOOR,FLOOR, WALL, KEY3,KEY3, WALL, FLOOR],
-			[FLOOR, FLOOR, FLOOR,FLOOR, WALL, KEY1,KEY1, WALL, FLOOR,FLOOR, WALL, KEY3,KEY3, WALL, FLOOR],
+			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,WALL, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR],
+			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, DOOR],
+			[FLOOR, WALL, FLOOR,FLOOR, WALL, WALL,FLOOR, WALL, FLOOR,FLOOR, FLOOR, FLOOR,FLOOR, WALL, GUARDIAN],
+			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,WALL, WALL, FLOOR,FLOOR, WALL, FLOOR],
+			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,WALL, WALL, FLOOR,WALL, WALL, FLOOR],
+			[FLOOR, FLOOR, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, WALL,FLOOR, WALL, FLOOR],
 			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR],
+			[FLOOR, WALL, FLOOR,FLOOR, FLOOR, FLOOR,FLOOR, FLOOR, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR],
 			[FLOOR, WALL, FLOOR,FLOOR, FLOOR, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR],
-			[FLOOR, WALL, FLOOR,FLOOR, FLOOR, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR],
-			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR],
-			[START, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, FLOOR, FLOOR],
-			[FLOOR, WALL, FLOOR,FLOOR, WALL, KEY2,KEY2, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, FLOOR, FLOOR],
-			[FLOOR, WALL, KEY2,KEY2, WALL, KEY2,KEY2, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR],
-			[FLOOR, WALL, KEY2,KEY2, WALL, KEY2,KEY2, WALL, FLOOR,FLOOR, FLOOR, KEY3,KEY3, WALL, FLOOR],
-			[FLOOR, WALL, KEY2,KEY2, WALL, KEY2,KEY2, WALL, FLOOR,FLOOR, FLOOR, KEY3,KEY3, WALL, FLOOR],
+			[FLOOR, WALL, FLOOR,FLOOR, WALL, WALL,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR],
+			[START, WALL, WALL,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, FLOOR, FLOOR],
+			[FLOOR, WALL, FLOOR,WALL, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, FLOOR, FLOOR],
+			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,WALL, WALL, FLOOR,WALL, WALL, WALL,FLOOR, WALL, FLOOR],
+			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,WALL, WALL, FLOOR,WALL, FLOOR, FLOOR,FLOOR, WALL, FLOOR],
+			[FLOOR, FLOOR, FLOOR,FLOOR, FLOOR, FLOOR,FLOOR, WALL, FLOOR,FLOOR, FLOOR, FLOOR,FLOOR, WALL, FLOOR],
 			]
 
 
-emplacement = {emplacement possible1 : "3  2 " , emplacement2 : 2 }
- choix = choice.emplacement()#.split()
- choix = choix.split()
- tilemap [choix[0]][choix[1]] = 99
+#D = {emplacement possible1 : "5  0 " , emplacement2 : "6  0" }
+ #random.choice(D.keys())
+ #choix = choix.split()
+ #tilemap [choix[0]][choix[1]] = 99
+
+tilemap [random.randint(0, 5)] [random.randint(2, 3)] = 99
+tilemap [random.randint(6, 11)] [random.randint(8, 9)] = 98
+tilemap [random.randint(0, 3)] [random.randint(11, 12)] = 97
 y = 0
 x = 0
 while y < 15: 
 	if tilemap [y][x] == 0:
-		WINDOW.blit(pygame.image.load("floor1.jpg").convert(), [x*43, y*32])
+		WINDOW.blit(Pics[FLOOR], [x*43, y*32])
 		print("floor")
 		pygame.display.flip()
 	elif tilemap [y][x] == 1:
-		WINDOW.blit(pygame.image.load("wall1.png").convert(), [x*43, y*32])
+		WINDOW.blit(Pics[WALL], [x*43, y*32])
 		print("wall")
 		pygame.display.flip()
 	elif tilemap [y][x] == 2:
-		DOOR = pygame.image.load("door.jpg").convert()
-		DOOR.set_colorkey((0,0,0))
-		WINDOW.blit(DOOR, [x*43, y*32])
+		WINDOW.blit(Pics[DOOR], [x*43, y*32])
 		pygame.display.flip()
 	elif tilemap [y][x] == 3:
-		WINDOW.blit(pygame.image.load("mac_gyver.png").convert_alpha(), [x*43, y*32])
+		WINDOW.blit(Pics[MAC], [x*43, y*32])
 		pygame.display.flip()
 	elif tilemap [y] [x] == 4:
-		WINDOW.blit(pygame.image.load("GUARDIAN.png").convert_alpha(), [x*43, y*32])
+		WINDOW.blit(Pics[GUARDIAN], [x*43, y*32])
 		pygame.display.flip()
-	elif tilemap [y] [x] == 10:
-		random = randrange(0, 5)
-		if random == 1:
-			WINDOW.blit(pygame.image.load("key1.png").convert_alpha(), [x*43, y*32])
-			pygame.display.flip()
+	elif tilemap [y] [x] == 99:
+		WINDOW.blit(Pics[ITEM1], [x*43, y*32])
+		pygame.display.flip()
+	elif tilemap [y] [x] == 98:
+		WINDOW.blit(Pics[ITEM2], [x*43, y*32])
+		pygame.display.flip()
+	elif tilemap [y] [x] == 97:
+		WINDOW.blit(Pics[ITEM3], [x*43, y*32])
+		pygame.display.flip()
 	print (x)
 	print (y)
 	x += 1
@@ -84,27 +93,3 @@ while y < 15:
 		y += 1
 		x = 0
 
-
-
-
-
-
-# fonction définissant floor acceptable = 10
-# placement objets aléatoire
-
-
-
-while False :
-	key1 = random.choice(tilemap)
-	
-	if key1 == 10 :
-		key2 = random.choice(tilemap)
-
-		if key2 == 10 :
-			key3 = random.choice(tilemap)
-
-			if key3 == 10 :
-				return True
-
-	else :
-		return False
