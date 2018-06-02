@@ -22,12 +22,11 @@ ITM = 0
 
 #BOUCLE PRINCIPALE
 continuer = 1
+#print(" la position y du garde est {} ,la position x du garde est {}" .format(GUARD_POS_Y, GUARD_POS_X))
 while continuer:
-	
 	#Limitation de vitesse de la boucle
-	pygame.time.Clock().tick(30)
+	pygame.time.Clock().tick(60)
 	for event in pygame.event.get():
-		
 		if event.type == QUIT:
 			continuer = 0
 		
@@ -45,14 +44,23 @@ while continuer:
 				ITM = MAC.move('up')
 			elif event.key == K_DOWN:
 				ITM = MAC.move('down')
+			if ITM >= 3 and MAC.case_y-1 == GUARD_POS_Y and MAC.case_x == GUARD_POS_X:
+				if event.key == K_RCTRL:
+					MAC.sleep_guard(MAC.case_x, MAC.case_y-1)
+					GUARD_POS_X = 199
+			#print(MAC.case_y, MAC.case_x)
+			#print(ITM)
 		#game over
-		if ITM < 3 and tilemap[MAC.case_y][MAC.case_x] == 4:
+		if MAC.case_y == GUARD_POS_Y and MAC.case_x == GUARD_POS_X:
+			print("YOLO")
 			continuer = 0			
 	#Affichages aux nouvelles positions
 	MAP.images_display() 
 	pygame.display.flip()
-	print("il y a {} items" .format(ITM))
+	#print("il y a {} items" .format(ITM))
 
 	#Victoire -> Retour à l'accueil
-	if tilemap[MAC.case_y][MAC.case_x] == 2:
+	if MAC.case_y == DOOR_POS_Y and MAC.case_x == DOOR_POS_X:
+		print("gg")
 		continuer = 0
+

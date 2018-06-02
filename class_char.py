@@ -16,9 +16,7 @@ class char :
 		self.items = items
 
 	def move(self, direction):
-		"""Methode permettant de déplacer le personnage"""
-		
-		#Déplacement vers la droite
+		#print(self.tilemap[self.case_y][self.case_x])
 		if direction == 'right':
 			#Pour ne pas dépasser l'écran
 			if self.case_x < (SPRITES - 1):
@@ -27,41 +25,47 @@ class char :
 					self.tilemap[self.case_y][self.case_x] = 0
 					self.case_x += 1
 					#Calcul de la position "réelle" en pixel
+					if self.tilemap[self.case_y][self.case_x] == 97 or self.tilemap[self.case_y][self.case_x] == 98 or self.tilemap[self.case_y][self.case_x] == 99:
+						self.items = self.items+1
 					self.x = self.case_x * SPRITE_HEIGHT
 					self.tilemap[self.case_y][self.case_x] = 3
-				elif self.tilemap[self.case_y][self.case_x+1] == 97 or 98 or 99:
-					self.items = self.items+1
 		#Déplacement vers la gauche
 		if direction == 'left':
 			if self.case_x > 0:
 				if self.tilemap[self.case_y][self.case_x-1] != 1:
 					self.tilemap[self.case_y][self.case_x] = 0
 					self.case_x -= 1
+					if self.tilemap[self.case_y][self.case_x] == 97 or self.tilemap[self.case_y][self.case_x] == 98 or self.tilemap[self.case_y][self.case_x] == 99:
+						self.items = self.items+1
 					self.x = self.case_x * SPRITE_HEIGHT
 					self.tilemap[self.case_y][self.case_x] = 3
-				elif self.tilemap[self.case_y][self.case_x-1] == 97 or 98 or 99:
-					self.items = self.items+1
 		#Déplacement vers le haut
 		if direction == 'up':
 			if self.case_y > 0:
 				if self.tilemap[self.case_y-1][self.case_x] != 1:
 					self.tilemap[self.case_y][self.case_x] = 0
-					print("test")
-					print(self.tilemap[self.case_y][self.case_x])
 					self.case_y -= 1
+					#print(self.tilemap[self.case_y][self.case_x])
+					if self.tilemap[self.case_y][self.case_x] == 97 or self.tilemap[self.case_y][self.case_x] == 98 or self.tilemap[self.case_y][self.case_x] == 99:
+						self.items = self.items+1
 					self.y = self.case_y * SPRITE_WIDHT
 					self.tilemap[self.case_y][self.case_x] = 3
-					print(self.tilemap[self.case_y][self.case_x])
-				elif self.tilemap[self.case_y-1][self.case_x] == 97 or 98 or 99:
-					self.items = self.items+1
+					#print(self.tilemap[self.case_y][self.case_x])
 		#Déplacement vers le bas
 		if direction == 'down':
 			if self.case_y < (SPRITES - 1):
 				if self.tilemap[self.case_y+1][self.case_x] != 1:
 					self.tilemap[self.case_y][self.case_x] = 0
 					self.case_y += 1
+					if self.tilemap[self.case_y][self.case_x] == 97 or self.tilemap[self.case_y][self.case_x] == 98 or self.tilemap[self.case_y][self.case_x] == 99:
+						self.items = self.items+1
 					self.y = self.case_y * SPRITE_WIDHT
 					self.tilemap[self.case_y][self.case_x] = 3
-				elif self.tilemap[self.case_y+1][self.case_x] == 97 or 98 or 99:
-					self.items = self.items+1
+				
 		return self.items
+	def sleep_guard(self, MAC_X , MAC_Y):
+		self.MAC_X = MAC_X
+		self.MAC_Y = MAC_Y
+		#self.GUARD = 58
+		self.tilemap[self.MAC_Y][self.MAC_X] = 0
+		#return self.GUARD

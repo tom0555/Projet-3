@@ -25,11 +25,9 @@ class Map :
 		while y < 15: 
 			if tilemap [y][x] == 0:
 				self.WINDOW.blit(pygame.image.load(Pics[FLOOR]).convert(), [x*43, y*32])
-				print("floor")
 				pygame.display.flip()
 			elif tilemap [y][x] == 1:
 				self.WINDOW.blit(pygame.image.load(Pics[WALL]).convert(), [x*43, y*32])
-				print("wall")
 				pygame.display.flip()
 			elif tilemap [y][x] == 2:
 				self.WINDOW.blit(pygame.image.load(Pics[DOOR]).convert(), [x*43, y*32])
@@ -49,8 +47,6 @@ class Map :
 			elif tilemap [y] [x] == 97:
 				self.WINDOW.blit(pygame.image.load(Pics[ITEM3]).convert(), [x*43, y*32])
 				pygame.display.flip()
-			print (x)
-			print (y)
 			x += 1
 			if x%15 == 0: # toutes les 15 colonnes je saute une ligne
 				y += 1
