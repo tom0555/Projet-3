@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: Utf-8 -*
-
+import os
+import sys
 import pygame
 from pygame.locals import *
 from class_char import *
@@ -9,58 +10,59 @@ from class_map import *
 
 pygame.init()
 
-#Ouverture de la fenêtre Pygame (carré : largeur = hauteur)
-WINDOW = pygame.display.set_mode((WINDOW_HEIGHT, WINDOW_WIDHT))
-MAP = Map()
-#MAP.random_item()
-#MAP.images_display()
-MAC = char(tilemap, ITEMS)
+#Window opening(widht, height).
+WINDOW = pygame.display.set_mode((WINDOW_WIDHT, WINDOW_HEIGHT))
+#Instance of the Map.
+map_lvl_1 = Map()
+#Instance of the character.
+mac_gyver = char(tilemap, ITEMS)
 pygame.display.set_caption(TITLE)
-MAP.random_item()
+#Random items placement.
+map_lvl_1.random_item()
+#Item's count
 ITM = 0
 
 
-#BOUCLE PRINCIPALE
-continuer = 1
-#print(" la position y du garde est {} ,la position x du garde est {}" .format(GUARD_POS_Y, GUARD_POS_X))
-while continuer:
-	#Limitation de vitesse de la boucle
+#Main loop
+MOVE_ON = 1
+
+while MOVE_ON:
+	#Loop speed limit.
 	pygame.time.Clock().tick(60)
 	for event in pygame.event.get():
-		if event.type == QUIT:
-			continuer = 0
 		
-		elif event.type == KEYDOWN:
-			#Si l'utilisateur presse Echap , quit
+		if event.type == KEYDOWN:
+			#If escape is used ,program stops.
 			if event.key == K_ESCAPE:
-				continuer = 0
+				MOVE_ON = 0
 					
-			#Touches de déplacement
+			#Move binds
 			elif event.key == K_RIGHT:
-				ITM = MAC.move('right')
+				#Return's recuperation and making the character moving to the right.
+				ITM = mac_gyver.move('right')
 			elif event.key == K_LEFT:
-				ITM = MAC.move('left')
+				ITM = mac_gyver.move('left')
 			elif event.key == K_UP:
-				ITM = MAC.move('up')
+				ITM = mac_gyver.move('up')
 			elif event.key == K_DOWN:
-				ITM = MAC.move('down')
-			if ITM >= 3 and MAC.case_y-1 == GUARD_POS_Y and MAC.case_x == GUARD_POS_X:
+				ITM = mac_gyver.move('down')
+			#Checking if we have our 3 items and if the guard's position is just on top of the character's actual position.
+			if ITM == 3 and mac_gyver.case_y - 1 == GUARD_POS_Y and mac_gyver.case_x == GUARD_POS_X:
 				if event.key == K_RCTRL:
-					MAC.sleep_guard(MAC.case_x, MAC.case_y-1)
+					#Make the guard sleep.
+					mac_gyver.sleep_guard(mac_gyver.case_x, mac_gyver.case_y - 1)
+					#Modifying guard's absisse to deny any guard replacement while refreshing tilemap.
 					GUARD_POS_X = 199
-			#print(MAC.case_y, MAC.case_x)
-			#print(ITM)
-		#game over
-		if MAC.case_y == GUARD_POS_Y and MAC.case_x == GUARD_POS_X:
-			print("YOLO")
-			continuer = 0			
-	#Affichages aux nouvelles positions
-	MAP.images_display() 
+		#Lose condition (if the character walks on the guard's case without made him to sleep before).
+		if mac_gyver.case_y == GUARD_POS_Y and mac_gyver.case_x == GUARD_POS_X:
+			print("Game over")
+			MOVE_ON = 0			
+	#Display refresh
+	map_lvl_1.images_display() 
 	pygame.display.flip()
-	#print("il y a {} items" .format(ITM))
 
-	#Victoire -> Retour à l'accueil
-	if MAC.case_y == DOOR_POS_Y and MAC.case_x == DOOR_POS_X:
-		print("gg")
-		continuer = 0
+	#Win condition (if the character walks on the outdoor).
+	if mac_gyver.case_y == DOOR_POS_Y and mac_gyver.case_x == DOOR_POS_X:
+		print("You won")
+		MOVE_ON = 0
 

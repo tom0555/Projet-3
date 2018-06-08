@@ -1,5 +1,5 @@
 
-#map design
+#Useful attributes 
 ITEM1 = 63
 ITEM2 = 64
 ITEM3 = 65
@@ -9,6 +9,7 @@ WALL = 1
 DOOR = 2
 START = 3
 MACDO = 5
+#Tilemap's disposition
 tilemap =   [
 			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,WALL, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR],
 			[FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, FLOOR,FLOOR, WALL, DOOR],
@@ -27,7 +28,7 @@ tilemap =   [
 			[FLOOR, FLOOR, FLOOR,FLOOR, FLOOR, FLOOR,FLOOR, WALL, FLOOR,FLOOR, FLOOR, FLOOR,FLOOR, WALL, FLOOR],
 			]
 
-#images dict
+#Pics dictionnary
 Pics = {
 			WALL :"wall1.png",
 			FLOOR :"floor1.jpg",
@@ -39,10 +40,10 @@ Pics = {
 			ITEM3 :"key3.jpg"
 		}
 
-#window parameters
+#Window parameters
 
-WINDOW_HEIGHT = 645
-WINDOW_WIDHT = 480
+WINDOW_WIDHT = 645
+WINDOW_HEIGHT = 480
 SPRITE_HEIGHT = WINDOW_HEIGHT/15
 SPRITE_WIDHT = WINDOW_WIDHT/15
 SPRITES = 15
