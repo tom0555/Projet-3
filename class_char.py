@@ -1,6 +1,8 @@
 """class character"""
-import pygame
-from ressources import *
+from ressources import SPRITES
+from ressources import SPRITE_HEIGHT
+from ressources import SPRITE_WIDHT
+
 class char:
     """class char"""
     def __init__(self, tilemap, items):
@@ -25,7 +27,9 @@ class char:
                     #Moving on by 1 case.
                     self.case_x += 1
                     #Checking if the actual position isn't an item position.
-                    if self.tilemap[self.case_y][self.case_x] == 97 or self.tilemap[self.case_y][self.case_x] == 98 or self.tilemap[self.case_y][self.case_x] == 99:
+                    if self.tilemap[self.case_y][self.case_x] == 97 or \
+                            self.tilemap[self.case_y][self.case_x] == 98 or \
+                            self.tilemap[self.case_y][self.case_x] == 99:
                         #If yes , we add one item to our count.
                         self.items = self.items + 1
                     #Calculation of pixel's position.
@@ -38,7 +42,9 @@ class char:
                 if self.tilemap[self.case_y][self.case_x - 1] != 1:
                     self.tilemap[self.case_y][self.case_x] = 0
                     self.case_x -= 1
-                    if self.tilemap[self.case_y][self.case_x] == 97 or self.tilemap[self.case_y][self.case_x] == 98 or self.tilemap[self.case_y][self.case_x] == 99:
+                    if self.tilemap[self.case_y][self.case_x] == 97 or \
+                            self.tilemap[self.case_y][self.case_x] == 98 or \
+                            self.tilemap[self.case_y][self.case_x] == 99:
                         self.items = self.items + 1
                     self.x_pixel = self.case_x * SPRITE_WIDHT
                     self.tilemap[self.case_y][self.case_x] = 3
@@ -48,7 +54,9 @@ class char:
                 if self.tilemap[self.case_y - 1][self.case_x] != 1:
                     self.tilemap[self.case_y][self.case_x] = 0
                     self.case_y -= 1
-                    if self.tilemap[self.case_y][self.case_x] == 97 or self.tilemap[self.case_y][self.case_x] == 98 or self.tilemap[self.case_y][self.case_x] == 99:
+                    if self.tilemap[self.case_y][self.case_x] == 97 or \
+                            self.tilemap[self.case_y][self.case_x] == 98 or \
+                            self.tilemap[self.case_y][self.case_x] == 99:
                         self.items = self.items + 1
                     self.y_pixel = self.case_y * SPRITE_HEIGHT
                     self.tilemap[self.case_y][self.case_x] = 3
@@ -58,7 +66,9 @@ class char:
                 if self.tilemap[self.case_y + 1][self.case_x] != 1:
                     self.tilemap[self.case_y][self.case_x] = 0
                     self.case_y += 1
-                    if self.tilemap[self.case_y][self.case_x] == 97 or self.tilemap[self.case_y][self.case_x] == 98 or self.tilemap[self.case_y][self.case_x] == 99:
+                    if self.tilemap[self.case_y][self.case_x] == 97 or \
+                            self.tilemap[self.case_y][self.case_x] == 98 or \
+                            self.tilemap[self.case_y][self.case_x] == 99:
                         self.items = self.items + 1
                     self.y_pixel = self.case_y * SPRITE_HEIGHT
                     self.tilemap[self.case_y][self.case_x] = 3

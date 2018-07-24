@@ -1,7 +1,22 @@
 """class map"""
 import random
+
 import pygame
-from ressources import *
+
+from ressources import WINDOW_HEIGHT
+from ressources import WINDOW_WIDHT
+from ressources import SPRITE_WIDHT
+from ressources import SPRITE_HEIGHT
+from ressources import PICS
+from ressources import TILEMAP
+from ressources import F
+from ressources import WALL
+from ressources import MACDO
+from ressources import DOOR
+from ressources import GUARDIAN
+from ressources import ITEM1
+from ressources import ITEM2
+from ressources import ITEM3
 
 class Map:
     """class map"""
